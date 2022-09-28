@@ -4,7 +4,7 @@
 
 namespace
 {
-	// 待ち時間
+	// 待ち時間	1秒:60フレーム
 	constexpr int kWaitFrameMin = 60;
 	constexpr int kWaitFrameMax = 180;
 	// 車の速度
@@ -46,11 +46,37 @@ void Car::update()
 		m_waitFrame--;
 		return;
 	}
-	m_pos += m_vec;
+	updateNormal();
 }
 
 void Car::draw()
 {
 	DrawGraphF(m_pos.x, m_pos.y, m_handle, true);
 	//DrawFormatString(0, 0, GetColor(255, 255, 255), "wait:%d", m_waitFrame);
+}
+/////////////
+// private //
+/////////////
+// まっすぐ進む
+void Car::updateNormal()
+{
+	m_pos += m_vec;
+}
+
+// 一時停止フェイント
+void Car::updateStop()
+{
+
+}
+
+// ジャンプする
+void Car::updateJump()
+{
+
+}
+
+// 途中で引き返す(必ず成功)
+void Car::updateReturn()
+{
+
 }
