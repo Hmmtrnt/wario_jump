@@ -82,7 +82,7 @@ void Player::draw()
 bool Player::isCol(Car& car)
 {
 	float playerLeft = getPos().x;
-	float playerRight = getPos().x + getColSize().x;
+	float playerRight = getPos().x + getColSize().x / 2;
 	float playerTop = getPos().y;
 	float playerBottom = getPos().y + getColSize().y;
 

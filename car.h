@@ -9,7 +9,7 @@ public:
 	virtual ~Car() {}
 
 	// グラフィックデータの設定	内部でサイズも取得する
-	void setGraphic(int handle);
+	void setGraphic(int handle, int Phandle);
 
 	// 初期設定	地面の高さを与える
 	void setup(float fieldY);
@@ -45,19 +45,27 @@ private:
 private:
 	// グラフィックハンドル
 	int m_handle;
-	// グラフィックの幅と高さ	当たり判定にも使用する
-	Vec2 m_size;
-
-	// 車の動き
-	MoveType m_moveType;
-
+	// プレイヤーのグラフィック
+	int m_Phandle;
 	// 移動開始までの待ち時間(フレーム数)
 	int m_waitFrame;
+	// フェイントの待ち時間
+	int m_waitFeint;
 
+	bool m_isRestart;
+
+	// 地面の高さ
+	float m_fieldY;
+
+	// グラフィックの幅と高さ	当たり判定にも使用する
+	Vec2 m_size;
+	// プレイヤーのグラフィックの幅と高さ
+	Vec2 m_Psize;
 	// 位置
 	Vec2 m_pos;
 	// ベクトル
 	Vec2 m_vec;
-	// 地面の高さ
-	float m_fieldY;
+
+	// 車の動き
+	MoveType m_moveType;
 };

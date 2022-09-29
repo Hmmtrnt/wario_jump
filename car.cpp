@@ -8,7 +8,7 @@ namespace
 	constexpr int kWaitFrameMin = 60;
 	constexpr int kWaitFrameMax = 180;
 	// 車の速度
-	constexpr float kSpeed = -20.0f;
+	constexpr float kSpeed = -15.0f;
 	// 車のジャンプ力
 	constexpr float kJumpCar = -30.0f;
 	// 車の重力
@@ -18,15 +18,19 @@ namespace
 Car::Car()
 {
 	m_handle = -1;
+	m_Phandle = -1;
 	m_fieldY = 0.0f;
 	m_moveType = kMoveTypeNormal;
 	m_waitFrame = 0;
+	m_waitFeint = 60;	// 1秒
 }
 
-void Car::setGraphic(int handle)
+void Car::setGraphic(int handle, int Phandle)
 {
 	m_handle = handle;
+	m_Phandle = Phandle;
 	GetGraphSizeF(m_handle, &m_size.x, &m_size.y);
+	GetGraphSizeF(m_Phandle, &m_Psize.x, &m_Psize.y);
 }
 
 void Car::setup(float fieldY)
@@ -96,7 +100,16 @@ void Car::update()
 
 void Car::draw()
 {
-	DrawGraphF(m_pos.x, m_pos.y, m_handle, true);
+	if (m_vec.x == -kSpeed)
+	{
+		// 右
+		DrawTurnGraph(m_pos.x, m_pos.y, m_handle, true);
+	}
+	else
+	{
+		// 左
+		DrawGraphF(m_pos.x, m_pos.y, m_handle, true);
+	}
 	//DrawFormatString(0, 0, GetColor(255, 255, 255), "wait:%d", m_waitFrame);
 }
 /////////////
@@ -106,24 +119,27 @@ void Car::draw()
 void Car::updateNormal()
 {
 	m_pos += m_vec;
+
+	if (m_pos.x == -10)
+	{
+		
+	}
 }
 
 // 一時停止フェイント
 void Car::updateStop()
 {
-	m_pos += m_vec;
+	//DrawFormatString(0, 0, GetColor(255, 255, 255), "wait:%d", m_waitFeint);
 
-	int feint = 120;
-
-	if (m_pos.x < 400)
+	if (m_pos.x < m_Psize.x + 60)
 	{
-		if (feint > 0)
+		if (m_waitFeint > 0)
 		{
-			feint--;
+			m_waitFeint--;
 			return;
 		}
-		//m_vec.x = kSpeed;
 	}
+	m_pos += m_vec;
 }
 
 // ジャンプする
@@ -139,7 +155,7 @@ void Car::updateJump()
 		isField = true;
 	}
 
-	if (m_pos.x < 500)
+	if (m_pos.x < m_Psize.x + 50)
 	{
 		if (isField)
 		{
@@ -155,8 +171,17 @@ void Car::updateReturn()
 {
 	m_pos += m_vec;
 
-	if (m_pos.x < 350)
+	if (m_pos.x < m_Psize.x + 60)
 	{
-		m_vec.x = -kSpeed;
+		//m_vec.x = -kSpeed;
+		if (m_waitFeint > 0)
+		{
+			m_vec.x = 0;
+			m_waitFeint--;
+		}
+		else
+		{
+			m_vec.x = -kSpeed;
+		}
 	}
 }

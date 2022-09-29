@@ -33,7 +33,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	player.setup(kFieldY);
 
 	Car car;
-	car.setGraphic(hCar);
+	car.setGraphic(hCar, hPlayer);
 	car.setup(kFieldY);
 
 	// ダブルバッファモード
@@ -45,6 +45,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		// 画面のクリア
 		ClearDrawScreen();
 
+		/*while ()
+		{
+
+		}*/
 		player.update();
 		car.update();
 
