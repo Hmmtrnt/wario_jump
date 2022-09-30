@@ -62,7 +62,7 @@ void Car::setup(float fieldY)
 	}
 	
 	// デバッグ用に挙動を決める
-	m_moveType = kMoveTypeStop;
+//	m_moveType = kMoveTypeStop;
 
 	// 動き始めるまでの時間を設定	1秒から3秒待つ	60フレームから180フレーム
 	m_waitFrame = GetRand(kWaitFrameMax - kWaitFrameMin) + kWaitFrameMin;
