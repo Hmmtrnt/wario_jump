@@ -1,7 +1,6 @@
 #include "DxLib.h"
 #include "game.h"
 #include "SceneMain.h"
-#include "Vec2.h"
 
 namespace
 {
@@ -56,6 +55,8 @@ void SceneMain::update()
 		m_car.setup(kFieldY);
 		m_player.setDead(false);
 	}*/
+
+	//return false;
 }
 
 // •`‰æ
