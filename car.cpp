@@ -94,8 +94,6 @@ void Car::update()
 		updateNormal();
 		break;
 	}
-
-	
 }
 
 void Car::draw()
@@ -119,11 +117,6 @@ void Car::draw()
 void Car::updateNormal()
 {
 	m_pos += m_vec;
-
-	if (m_pos.x == -10)
-	{
-		
-	}
 }
 
 // 一時停止フェイント
@@ -185,3 +178,9 @@ void Car::updateReturn()
 		}
 	}
 }
+
+// 繰り返す
+//void Car::isRestart()
+//{
+//	
+//}

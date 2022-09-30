@@ -19,6 +19,8 @@ public:
 	// 描画
 	void draw();
 
+//	void isRestart();
+
 	// 位置の取得
 	Vec2 getPos() const { return m_pos; }
 	// サイズの取得
